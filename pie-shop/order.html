@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="site.css" type="text/css">
+    <title>Order |Bethany's Pie Shop</title>
+    <style>
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius: 2px;
+            width: 100%;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input[type="reset"] {
+            background: transparent;
+            border: 0;
+            text-decoration: underline;
+            cursor: pointer;
+
+        }
+
+        input[type="submit"] {
+            border: solid 1px #999;
+            border-radius: 3px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside><img src="images/logo.png" alt="bethany's pies"></aside>
+        <article>
+            <h1>Order</h1>
+            <div class="pie">
+                <img src="" alt="">
+                    <div class="columns">
+                        <div class="title"></div>
+                        <div class="price"></div>
+                    </div>
+              <p class="desc"></p>      
+            </div>
+            <form action="http://localhost:7071/api/post"method="POST">
+
+                <div class="input-group">
+                    <div>
+                        <label for="first-name">First Name</label>
+                    </div>
+                    <div><input type="text" name="first-name" id="first-name"></div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="last-name">Last Name</label>
+                    </div>
+                    <div><input type="text" name="last-name" id="last-name"></div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="address">Address</label>
+                    </div>
+                    <div><input type="text" name="address" id="address"></div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="location">Location</label>
+                    </div>
+                    <select name="state" id="state">
+                        <option value="" selected>[select one]</option>
+                            <option value="Nairobi" class="value">Nairobi</option>
+                            <option value="Mombasa" class="value">Mombasa</option>
+                            <option value="Kisumu" class="value">Kisumu</option>
+                            <option value="Nakuru" class="value">Nakuru</option>
+                            <option value="Eldoret" class="value">Eldoret</option>
+                            <option value="Kajiado" class="value">Kajiado</option>
+                </select>
+                 </div>
+
+                 <div class="input-group">
+                    <div>
+                        <label for="Phone-Number">Phone Number</label>
+                    </div>
+                    <div><input type="tel" name="phone-number" id="phone-number"></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="comments">Comments</label></div>
+                    <div>
+                        <textarea 
+                        name="comments" 
+                        id="comments" 
+                        cols="30" 
+                        rows="10"></textarea>
+                    </div>
+                </div> 
+                
+                <input type="reset" value="Reset">
+                <input type="submit" value="Order">
+
+
+            </form>
+        </article>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+<script>
+    window.addEventListener("DOMContentLoaded", function(e){
+       const order = localStorage.getItem("order");
+
+       if (order) {
+           const pieOrder = JSON.parse("order")
+
+           const pie = document.querySelector(".pie")
+
+           const title = pie.querySelector(".title")
+           const price = pie.querySelector(".price")
+           const desc = pie.querySelector(".desc")
+
+           title.innerText = pieOrder.title
+           price.innerText = pieOrder.price
+           desc.innerText = pieOrder.desc
+
+
+           const img = pie.querySelector("img")
+           img.setAttribute("src", 'images/${pieOrder.id}.png');
+           img.setAttribute("alt", pieOrder.title)
+       } 
+    });
+</script>
+</html>
